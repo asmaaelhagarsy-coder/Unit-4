@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 1 with Ms English — All‑in‑One Lessons (WORKING Tabs) — أ. أسماء محمود الهجرسى</title>
+<style>
+  :root{--bg:#f9fafb;--text:#0f172a;--muted:#6b7280;--accent:#6c63ff;--accent2:#00bfa6;--good:#22c55e;--bad:#ef4444}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Cairo',system-ui,Segoe UI,Arial;background:var(--bg);color:var(--text)}
+  header{position:sticky;top:0;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;padding:12px 14px;z-index:20}
+  .head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px}
+  .brand img{height:40px;width:auto;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+  .brand h1{margin:0;font-size:18px}
+  .by{background:#ffffff22;padding:6px 10px;border-radius:999px;font-weight:700}
+  nav.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  nav.tabs button{flex:1;border:0;border-radius:10px;padding:10px;background:#fff;color:#111;font-weight:700}
+  nav.tabs button.active{background:#fde047}
+  main{padding:14px}
+  section.view{display:none}
+  section.view.active{display:block}
+  .subtabs{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 12px}
+  .subtabs button{border:0;border-radius:999px;padding:8px 12px;background:#e5e7eb;font-weight:700}
+  .subtabs button.active{background:#fde047}
+  .subview{display:none}
+  .subview.active{display:block}
+  .card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 6px 16px rgba(0,0,0,.08);margin-bottom:14px}
+  .stack{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:10px 12px;font-weight:700}
+  .btn.ghost{background:#fff;color:var(--accent);border:2px solid var(--accent)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+  .v-card{border-radius:16px;padding:14px;box-shadow:0 6px 16px rgba(0,0,0,.08)}
+  .chip{display:inline-block;background:rgba(0,0,0,.06);padding:4px 8px;border-radius:999px;font-size:12px;margin-inline-start:6px}
+  .input{width:100%;padding:10px;border-radius:10px;border:2px solid #e5e7eb}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  @media(min-width:680px){.grid{grid-template-columns:repeat(4,1fr)}}
+  .tile{padding:12px;border-radius:12px;background:#eef2ff;border:2px solid #e0e7ff;text-align:center;font-weight:700}
+  .option{padding:10px;border:2px solid #e5e7eb;border-radius:12px;margin-top:8px}
+  .option.correct{border-color:#16a34a;background:#e8fbef}
+  .option.wrong{border-color:#ef4444;background:#fee2e2}
+  .score{font-weight:800}
+  .badge{display:inline-flex;align-items:center;gap:6px;background:#eef2ff;color:#111;border:1px solid #e0e7ff;border-radius:999px;padding:6px 10px}
+  canvas#confetti{position:fixed;inset:0;pointer-events:none;z-index:100}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<header>
+  <div class="head">
+    <div class="brand">
+      <img src="ms_english_logo.png" alt="Ms English logo">
+      <h1>Unit 1 with Ms English — All‑in‑One Lessons Hub</h1>
+    </div>
+    <span class="by">Prepared by: أ. أسماء محمود الهجرسى</span>
+  </div>
+  <nav class="tabs" id="mainTabs">
+    <button data-target="L1" class="active">Lesson 1: Egypt’s Heritage</button>
+    <button data-target="L2">Lesson 2: Moments That Shaped Us</button>
+    <button data-target="L3">Lesson 3: Now Starts Long Ago (Grammar)</button>
+    <button data-target="L4">Lesson 4: Where Pride Begins</button>
+    <button data-target="EXAM">Unit Exam (25 MCQs)</button>
+    <button data-target="SET">Settings</button>
+  </nav>
+</header>
+<main>
+  <!-- Lessons (same as before, minimal placeholders; content will be populated by JS) -->
+  <section id="L1" class="view active">
+    <div class="subtabs"><button data-sub="vocab" class="active">Vocabulary</button><button data-sub="reading">Reading</button><button data-sub="games">Games</button><button data-sub="exam">Exam</button></div>
+    <div id="L1_vocab" class="subview active"><div class="card"><h2>🎴 Vocabulary + Dictation</h2><div id="L1_cards" class="cards"></div></div><div class="card"><h3>✍️ Word Dictation</h3><div id="L1_dict"></div></div></div>
+    <div id="L1_reading" class="subview"><div class="card"><h2>📖 Reading (Sentence by Sentence)</h2><div id="L1_sentences"></div><div class="stack"><button class="btn" id="L1_playAll">▶️ Play All Slowly</button><button class="btn ghost" id="L1_stopAll">⏹️ Stop</button></div></div></div>
+    <div id="L1_games" class="subview"><div class="card"><h2>🧩 Interactive Games</h2><div class="card"><h3>🃏 Match Word ↔ Meaning</h3><div id="L1_match" class="grid"></div></div><div class="card"><h3>⚡ Mini Kahoot</h3><div id="L1_kQ"></div><div id="L1_kOpts"></div><button class="btn" id="L1_kStart">Start Round</button></div></div></div>
+    <div id="L1_exam" class="subview"><div class="card"><h2>📝 Interactive Lesson Exam</h2><div class="stack"><input id="L1_name" class="input" placeholder="اكتب اسمك الثلاثي"><button class="btn" id="L1_start">Start Exam</button></div><div id="L1_examBox" class="card"></div><div id="L1_examRes" class="score"></div><div id="L1_examReview" class="card"></div></div></div>
+  </section>
+
+  <section id="L2" class="view"><div class="subtabs"><button data-sub="vocab" class="active">Vocabulary</button><button data-sub="reading">Reading</button><button data-sub="games">Games</button><button data-sub="exam">Exam</button></div><div id="L2_vocab" class="subview active"><div class="card"><h2>🎴 Vocabulary + Dictation</h2><div id="L2_cards" class="cards"></div></div><div class="card"><h3>✍️ Word Dictation</h3><div id="L2_dict"></div></div></div><div id="L2_reading" class="subview"><div class="card"><h2>📖 Reading</h2><div id="L2_sentences"></div><div class="stack"><button class="btn" id="L2_playAll">▶️ Play All Slowly</button><button class="btn ghost" id="L2_stopAll">⏹️ Stop</button></div></div></div><div id="L2_games" class="subview"><div class="card"><h2>🧩 Interactive Games</h2><div class="card"><h3>🃏 Match</h3><div id="L2_match" class="grid"></div></div><div class="card"><h3>⚡ Mini Kahoot</h3><div id="L2_kQ"></div><div id="L2_kOpts"></div><button class="btn" id="L2_kStart">Start Round</button></div></div></div><div id="L2_exam" class="subview"><div class="card"><h2>📝 Interactive Lesson Exam</h2><div class="stack"><input id="L2_name" class="input" placeholder="اكتب اسمك الثلاثي"><button class="btn" id="L2_start">Start Exam</button></div><div id="L2_examBox" class="card"></div><div id="L2_examRes" class="score"></div><div id="L2_examReview" class="card"></div></div></div></section>
+
+  <section id="L3" class="view"><div class="subtabs"><button data-sub="vocab" class="active">Vocabulary</button><button data-sub="reading">Reading</button><button data-sub="grammar">Grammar</button><button data-sub="games">Games</button><button data-sub="exam">Exam</button></div><div id="L3_vocab" class="subview active"><div class="card"><h2>🎴 Vocabulary + Dictation</h2><div id="L3_cards" class="cards"></div></div><div class="card"><h3>✍️ Word Dictation</h3><div id="L3_dict"></div></div></div><div id="L3_reading" class="subview"><div class="card"><h2>📖 Reading</h2><div id="L3_sentences"></div><div class="stack"><button class="btn" id="L3_playAll">▶️ Play All Slowly</button><button class="btn ghost" id="L3_stopAll">⏹️ Stop</button></div></div></div><div id="L3_grammar" class="subview"><div class="card"><h2>🧠 Grammar: Past Simple & Past Continuous</h2><div class="badge">Rule: Past Simple — فعل مكتمل في الماضي بوقت محدد.</div><div class="badge">Rule: Past Continuous — فعل جاري في لحظة بالماضي وغالبًا مع while/when.</div><div class="card"><h3>📊 MCQ Practice</h3><div id="L3_mcq"></div></div></div><div id="L3_games" class="subview"><div class="card"><h2>🧩 Interactive Games</h2><div class="card"><h3>🃏 Match</h3><div id="L3_match" class="grid"></div></div><div class="card"><h3>⚡ Mini Kahoot</h3><div id="L3_kQ"></div><div id="L3_kOpts"></div><button class="btn" id="L3_kStart">Start Round</button></div></div></div><div id="L3_exam" class="subview"><div class="card"><h2>📝 Interactive Lesson Exam</h2><div class="stack"><input id="L3_name" class="input" placeholder="اكتب اسمك الثلاثي"><button class="btn" id="L3_start">Start Exam</button></div><div id="L3_examBox" class="card"></div><div id="L3_examRes" class="score"></div><div id="L3_examReview" class="card"></div></div></div></section>
+
+  <section id="L4" class="view"><div class="subtabs"><button data-sub="vocab" class="active">Vocabulary</button><button data-sub="reading">Reading</button><button data-sub="games">Games</button><button data-sub="exam">Exam</button></div><div id="L4_vocab" class="subview active"><div class="card"><h2>🎴 Vocabulary + Dictation</h2><div id="L4_cards" class="cards"></div></div><div class="card"><h3>✍️ Word Dictation</h3><div id="L4_dict"></div></div></div><div id="L4_reading" class="subview"><div class="card"><h2>📖 Reading</h2><div id="L4_sentences"></div><div class="stack"><button class="btn" id="L4_playAll">▶️ Play All Slowly</button><button class="btn ghost" id="L4_stopAll">⏹️ Stop</button></div></div></div><div id="L4_games" class="subview"><div class="card"><h2>🧩 Interactive Games</h2><div class="card"><h3>🃏 Match</h3><div id="L4_match" class="grid"></div></div><div class="card"><h3>⚡ Mini Kahoot</h3><div id="L4_kQ"></div><div id="L4_kOpts"></div><button class="btn" id="L4_kStart">Start Round</button></div></div></div><div id="L4_exam" class="subview"><div class="card"><h2>📝 Interactive Lesson Exam</h2><div class="stack"><input id="L4_name" class="input" placeholder="اكتب اسمك الثلاثي"><button class="btn" id="L4_start">Start Exam</button></div><div id="L4_examBox" class="card"></div><div id="L4_examRes" class="score"></div><div id="L4_examReview" class="card"></div></div></div></section>
+
+  <!-- Unit EXAM (25 MCQs) -->
+  <section id="EXAM" class="view">
+    <div class="card">
+      <h2>📚 Unit Exam — 25 MCQs (15 Vocabulary + 10 Grammar)</h2>
+      <p class="muted">اختبار تفاعلي ذاتي التصحيح: 15 جملة على الكلمات و10 على الجرامر (Past Simple vs. Past Continuous). كل سؤال 4 اختيارات. يظهر التصحيح والنتيجة النهائية والمراجعة.</p>
+      <div class="stack"><input id="EX_name" class="input" placeholder="اكتب اسمك الثلاثي"><button class="btn" id="EX_start">ابدئي الامتحان</button></div>
+      <div id="EX_box" class="card"></div>
+      <div id="EX_res" class="score"></div>
+      <div id="EX_review" class="card"></div>
+    </div>
+  </section>
+
+  <section id="SET" class="view"><div class="card"><h2>⚙️ Settings</h2><button class="btn ghost" id="testVoice">Test British Voice</button><p class="muted">نستخدم SpeechSynthesis (en‑GB). قد يحتاج الصوت نقرة أولى للسماح.</p></div></section>
+</main>
+
+<script>
+// Voice & FX
+let preferredVoice=null; function loadVoices(){const vs=speechSynthesis.getVoices(); preferredVoice=vs.find(v=>v.lang && v.lang.startsWith('en-GB'))||vs.find(v=>v.lang && v.lang.startsWith('en'))||null;} window.speechSynthesis.onvoiceschanged=loadVoices; loadVoices();
+function speak(text, rate=0.86){const u=new SpeechSynthesisUtterance(text); if(preferredVoice) u.voice=preferredVoice; u.lang='en-GB'; u.rate=rate; speechSynthesis.cancel(); speechSynthesis.speak(u);} 
+function beep(good=true){const ctx=new(window.AudioContext||window.webkitAudioContext)(); const o=ctx.createOscillator(), g=ctx.createGain(); o.type=good?'triangle':'sawtooth'; o.frequency.value=good?880:220; g.gain.value=0.05; o.connect(g); g.connect(ctx.destination); o.start(); setTimeout(()=>{o.stop();ctx.close();},160);} 
+const canvas=document.getElementById('confetti'); const ctx=canvas.getContext('2d'); let particles=[]; function resize(){canvas.width=innerWidth; canvas.height=innerHeight;} window.addEventListener('resize',resize); resize(); function confetti(n=80){for(let i=0;i<n;i++) particles.push({x:Math.random()*canvas.width,y:-10,vx:(Math.random()-.5)*3,vy:Math.random()*3+2,c:`hsl(${Math.random()*360},90%,60%)`,s:Math.random()*6+4,a:1});} function tick(){ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.x+=p.vx; p.y+=p.vy; p.vy+=0.05; p.a-=0.01;}); particles=particles.filter(p=>p.a>0); particles.forEach(p=>{ctx.globalAlpha=p.a; ctx.fillStyle=p.c; ctx.fillRect(p.x,p.y,p.s,p.s)}); requestAnimationFrame(tick);} requestAnimationFrame(tick);
+
+// Navigation
+const mainTabs=document.getElementById('mainTabs');
+mainTabs.addEventListener('click', e=>{if(e.target.tagName!=='BUTTON') return; const id=e.target.dataset.target; document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); document.querySelectorAll('section.view').forEach(v=>v.classList.remove('active')); document.getElementById(id).classList.add('active');});
+
+document.querySelectorAll('section.view').forEach(sec=>{const subtabs=sec.querySelector('.subtabs'); if(!subtabs) return; subtabs.addEventListener('click', e=>{if(e.target.tagName!=='BUTTON') return; const sid=e.target.dataset.sub; subtabs.querySelectorAll('button').forEach(b=>b.classList.remove('active')); e.target.classList.add('active'); sec.querySelectorAll('.subview').forEach(v=>v.classList.remove('active')); sec.querySelector('#'+sec.id+'_'+sid).classList.add('active');});});
+
+// Data
+const COLORS=['#ffadad','#ffd6a5','#fdffb6','#caffbf','#9bf6ff','#a0c4ff','#bdb2ff','#ffc6ff','#f1f0ff','#e6fffa'];
+const DATA={
+  L1:{vocab:[{w:'heritage', ar:'تراث', ex:'Egyptian heritage is rich and diverse.'},{w:'civilization', ar:'حضارة', ex:'Egypt is one of the oldest civilizations.'},{w:'monument', ar:'أثر تاريخي / معلم', ex:'The pyramids are famous monuments.'},{w:'culture', ar:'ثقافة', ex:'Culture connects people across time.'},{w:'achievement', ar:'إنجاز', ex:'Writing and medicine were great achievements.'},{w:'pride', ar:'فخر', ex:'People feel pride in their history.'}], sentences:['Egypt’s heritage includes mighty monuments and lasting achievements.','Ancient civilization shaped art, science, and daily life.','Culture helps people remember values and share knowledge.'], exam:[{q:'The pyramids are famous _____.', opts:['neighborhoods','monuments','rivers','games'], a:1},{q:'Egypt is an ancient _____.', opts:['civilization','decision','silence','party'], a:0},{q:'People feel _____ in their history.', opts:['noise','pride','problem','fear'], a:1}]},
+  L2:{vocab:[{w:'moment', ar:'لحظة', ex:'It was a proud moment for everyone.'},{w:'shape (v.)', ar:'يشكّل', ex:'Great events shape our future.'},{w:'leader', ar:'قائد', ex:'A good leader inspires people.'},{w:'influence', ar:'تأثير', ex:'This decision had a strong influence.'},{w:'responsibility', ar:'مسؤولية', ex:'We share responsibility to protect culture.'},{w:'decision', ar:'قرار', ex:'The committee made a wise decision.'},{w:'celebrate', ar:'يحتفل', ex:'People celebrate important achievements.'},{w:'value (n.)', ar:'قيمة', ex:'Honesty is a key value.'}], sentences:['There are moments that shape how people think and act.','Leaders make decisions that influence the nation.','We celebrate achievements and teach values to the next generation.','With responsibility and teamwork, progress becomes possible.'], exam:[{q:'A proud _____ brings people together.', opts:['moment','noise','problem','holiday'], a:0},{q:'Leaders _____ others to do their best.', opts:['confuse','ignore','inspire','close'], a:2},{q:'A wise _____ can shape the future.', opts:['game','decision','mistake','river'], a:1},{q:'We have a shared _____.', opts:['weather','responsibility','silence','hobby'], a:1}]},
+  L3:{vocab:[{w:'ancient', ar:'قديم / عتيق', ex:'Ancient tools were simple but useful.'},{w:'discover', ar:'يكتشف', ex:'People discovered writing a long time ago.'},{w:'writing', ar:'الكتابة', ex:'Writing helped people record ideas.'},{w:'progress', ar:'تقدّم', ex:'Technology brought quick progress.'},{w:'remember', ar:'يتذكّر', ex:'We remember the past to learn from it.'},{w:'communicate', ar:'يتواصل', ex:'People used letters to communicate.'},{w:'technology', ar:'تكنولوجيا', ex:'Modern technology makes life easier.'},{w:'farm', ar:'يزرع / الزراعة', ex:'Long ago, people farmed and raised animals.'},{w:'raise', ar:'يربّي', ex:'Families raised goats and sheep.'},{w:'during', ar:'أثناء', ex:'During the lesson, the bell rang.'}], sentences:['Long ago, people mainly lived by farming and raising animals.','The discovery of writing helped humans record ideas and share knowledge.','New tools and early technology made daily life easier and showed progress.','Use the past simple for completed actions in the past.','Use the past continuous to describe an action in progress at a time in the past.'], exam:[{q:'We use the past simple to talk about _____.', opts:['future plans','completed actions in the past','ongoing actions now','habits only'], a:1},{q:'While I _____ to school, it started to rain.', opts:['walk','was walking','walked','am walking'], a:1},{q:'At 2 o’clock, I _____ a book when the phone rang.', opts:['read','was reading','am reading','have read'], a:1}], mcq:[{q:'At 8 pm, I ____ dinner when my friend called.', opts:['cooked','was cooking','cook','am cooking'], a:1},{q:'Yesterday, we ____ a film.', opts:['watched','were watching','watch','are watching'], a:0},{q:'While she ____ to school, it started to rain.', opts:['walked','was walking','walks','is walking'], a:1},{q:'He ____ the letter and then went to sleep.', opts:['wrote','was writing','writes','is writing'], a:0},{q:'They ____ when the teacher arrived.', opts:['played','were playing','play','are playing'], a:1}]},
+  L4:{vocab:[{w:'pride', ar:'فخر', ex:'True pride grows from strong roots of culture and values.'},{w:'heritage', ar:'تراث', ex:'Our heritage connects us to the past.'},{w:'civilization', ar:'حضارة', ex:'Egypt is one of the oldest civilizations.'},{w:'monument', ar:'أثر تاريخي / معلم', ex:'The pyramids are mighty monuments.'},{w:'mighty', ar:'قوي / عظيم', ex:'The mighty pyramids still amaze the world.'},{w:'magnificent', ar:'رائع / مهيب', ex:'Temples along the Nile are magnificent.'},{w:'achievement', ar:'إنجاز', ex:'Writing and medicine were great achievements.'}], sentences:['Pride grows slowly like a tree with deep roots of history, culture, and values.','Ancient Egyptians built mighty pyramids and magnificent temples along the Nile.','True pride begins when we understand our past and work with determination for the future.'], exam:[{q:'The pyramids and temples are examples of ancient _____.', opts:['monuments','neighborhoods','storms','games'], a:0},{q:'“Heritage” refers to _____.', opts:['future plans only','history, culture, and traditions','modern technology','traffic rules'], a:1}]}
+};
+
+// Helper builders
+function populateVocab(section){ const cards=document.getElementById(section+'_cards'); const list=DATA[section].vocab; list.forEach((it,i)=>{const c=document.createElement('div'); c.className='v-card'; c.style.background=COLORS[i%COLORS.length]; c.innerHTML=`<h3>${it.w} <span class='chip'>${it.ar}</span></h3><p>📌 <em>${it.ex}</em></p>`; const row=document.createElement('div'); row.className='stack'; const b1=document.createElement('button'); b1.className='btn'; b1.textContent='▶️ Pronounce'; b1.onclick=()=>speak(it.w,0.92); const b2=document.createElement('button'); b2.className='btn ghost'; b2.textContent='🎧 Speak Example'; b2.onclick=()=>speak(it.ex,0.9); row.append(b1,b2); c.appendChild(row); cards.appendChild(c);}); }
+function populateReading(section){ const host=document.getElementById(section+'_sentences'); const lines=DATA[section].sentences; lines.forEach((line,i)=>{const row=document.createElement('div'); row.className='card'; row.innerHTML=`<div class='stack'><span><b>${i+1}.</b> ${line}</span><button class='btn' data-i='${i}'>▶️ Play</button><button class='btn ghost' data-r='${i}'>🔁 Replay</button></div>`; host.appendChild(row);}); host.addEventListener('click',e=>{const i=e.target.getAttribute('data-i')||e.target.getAttribute('data-r'); if(i!==null) speak(lines[+i],0.84);}); document.getElementById(section+'_playAll').onclick=()=>{speechSynthesis.cancel(); lines.forEach((line,i)=> setTimeout(()=>speak(line,0.84), i*2600));}; document.getElementById(section+'_stopAll').onclick=()=>speechSynthesis.cancel(); }
+function buildDictation(section){ const wrap=document.getElementById(section+'_dict'); const list=DATA[section].vocab; let idx=0, score=0; const order=[...list.keys()]; shuffle(order); next(); function next(){ const item=list[order[idx]]; wrap.innerHTML=`<div class='stack'><span class='chip'>Meaning: <b>${item.ar}</b></span><button class='btn' id='${section}_play'>▶️ Hear Word</button></div><input id='${section}_ans' class='input' placeholder='Type the word in English'/><div class='stack' style='margin-top:8px'><button class='btn' id='${section}_check'>Check</button><span class='chip'>Score: ${score} / ${idx}</span></div>`; document.getElementById(section+'_play').onclick=()=>speak(item.w,0.92); document.getElementById(section+'_check').onclick=()=>{const a=document.getElementById(section+'_ans').value.trim().toLowerCase(); const ok=a===item.w.toLowerCase(); if(ok){score++; confetti(70); beep(true);} else {beep(false);} idx++; if(idx<order.length) next(); else wrap.innerHTML=`<h4>Great! Your dictation score: ${score} / ${order.length}</h4>`; }; } }
+function buildMatch(section){ const host=document.getElementById(section+'_match'); const list=DATA[section].vocab.slice(0, Math.min(8, DATA[section].vocab.length)); const tiles=[]; list.forEach((p,i)=>{tiles.push({t:p.w,k:i}); tiles.push({t:p.ar,k:i});}); shuffle(tiles); let first=null, found=0; tiles.forEach(t=>{const d=document.createElement('div'); d.className='tile'; d.textContent=t.t; d.dataset.key=t.k; d.onclick=()=>sel(d); host.appendChild(d);}); function sel(d){ if(d.classList.contains('correct')) return; d.classList.toggle('selected'); if(!first){first=d; return;} if(first.dataset.key===d.dataset.key && first!==d){[first,d].forEach(x=>{x.classList.add('correct'); x.classList.remove('selected');}); found++; confetti(60); beep(true);} else { [first,d].forEach(x=>x.classList.add('wrong')); beep(false); setTimeout(()=>{[first,d].forEach(x=>x.classList.remove('wrong','selected'));},500);} first=null; } }
+function buildKahoot(section){ const qhost=document.getElementById(section+'_kQ'); const ohost=document.getElementById(section+'_kOpts'); document.getElementById(section+'_kStart').onclick=()=>{const list=DATA[section].vocab; const item=list[Math.floor(Math.random()*list.length)]; qhost.innerHTML=`Arabic meaning: <b>${item.ar}</b> — choose the correct English word:`; ohost.innerHTML=''; const distractors=shuffle(list.filter(v=>v!==item).map(v=>v.w)).slice(0,3); const ops=shuffle([item.w, ...distractors]); ops.forEach(op=>{const d=document.createElement('div'); d.className='option'; d.textContent=op; d.onclick=()=>{ohost.querySelectorAll('.option').forEach(o=>o.onclick=null); const ok=op===item.w; if(ok){d.classList.add('correct'); confetti(70); beep(true);} else {d.classList.add('wrong'); beep(false);} }; ohost.appendChild(d);}); } }
+function buildExam(section){ const name=document.getElementById(section+'_name'); const start=document.getElementById(section+'_start'); const box=document.getElementById(section+'_examBox'); const res=document.getElementById(section+'_examRes'); const rev=document.getElementById(section+'_examReview'); const qs=DATA[section].exam; start.onclick=()=>{ if(!name.value.trim()){alert('Please enter your full name.'); return;} let idx=0, score=0; const order=[...qs.keys()]; shuffle(order); render(); function render(){ const q=qs[order[idx]]; box.innerHTML=`<div class='card'><h3>Question ${idx+1} of ${qs.length}</h3><p>${q.q}</p></div>`; q.opts.forEach((op,i)=>{const d=document.createElement('div'); d.className='option'; d.textContent=op; d.onclick=()=>choose(i); box.appendChild(d);}); } function choose(i){ const q=qs[order[idx]]; const ops=[...box.querySelectorAll('.option')]; ops.forEach(o=>o.onclick=null); const ok=i===q.a; ops[q.a].classList.add('correct'); if(!ok){ops[i].classList.add('wrong'); beep(false);} else {score++; confetti(80); beep(true);} setTimeout(()=>{ idx++; if(idx<qs.length) render(); else finish(); }, 420); } function finish(){ box.innerHTML=''; res.innerHTML=`Your score: <b>${score}</b> / ${qs.length}`; rev.innerHTML='<h4>Quick Review</h4>'+ order.map(ii=>{const qq=qs[ii]; return `<div><b>Q:</b> ${qq.q}<br><span class=muted>✔ Correct:</span> ${qq.opts[qq.a]}</div>`;}).join('<hr>'); } } }
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a;}
+
+// Build lessons content
+['L1','L2','L3','L4'].forEach(id=>{populateVocab(id); buildDictation(id); populateReading(id); buildMatch(id); buildKahoot(id); buildExam(id);});
+// Grammar MCQs (L3)
+(function(){const host=document.getElementById('L3_mcq'); const list=DATA.L3.mcq; list.forEach((q,idx)=>{const box=document.createElement('div'); box.className='card'; box.innerHTML=`<p><b>${idx+1}.</b> ${q.q}</p>`; q.opts.forEach((op,i)=>{const d=document.createElement('div'); d.className='option'; d.textContent=op; d.onclick=()=>{box.querySelectorAll('.option').forEach(o=>o.onclick=null); const ok=i===q.a; if(ok){d.classList.add('correct'); confetti(70); beep(true);} else {d.classList.add('wrong'); beep(false);} }; box.appendChild(d);}); host.appendChild(box);});})();
+
+document.getElementById('testVoice').onclick=()=>speak('This is a British English voice test for Unit 1 with Ms English.',0.86);
+
+// Unit EXAM — 25 MCQs (15 vocab + 10 grammar)
+const EX_VOCAB = [
+  {q:'People feel ______ in their history.', opts:['pride','noise','river','holiday'], a:0},
+  {q:'The pyramids are famous ______.', opts:['neighborhoods','monuments','computers','birds'], a:1},
+  {q:'Egypt is an ancient ______.', opts:['civilization','decision','silence','party'], a:0},
+  {q:'We should protect our ______.', opts:['heritage','traffic','weather','noise'], a:0},
+  {q:'Leaders make ______ that influence the nation.', opts:['decisions','rivers','holidays','games'], a:0},
+  {q:'Great events ______ our future.', opts:['shape','sleep','close','copy'], a:0},
+  {q:'Honesty is a key ______.', opts:['value','storm','street','break'], a:0},
+  {q:'Teachers ______ the next generation.', opts:['inspire','ignore','confuse','close'], a:0},
+  {q:'People ______ important achievements.', opts:['celebrate','delete','flood','argue'], a:0},
+  {q:'We share a ______ to protect culture.', opts:['responsibility','silence','hobby','river'], a:0},
+  {q:'Ancient Egyptians built mighty ______.', opts:['monuments','neighborhoods','storms','games'], a:0},
+  {q:'Our ______ connects us to the past.', opts:['heritage','traffic','weather','noise'], a:0},
+  {q:'New tools showed quick ______.', opts:['progress','problem','winter','noise'], a:0},
+  {q:'People used letters to ______.', opts:['communicate','dance','sleep','draw'], a:0},
+  {q:'Temples along the Nile are ______.', opts:['magnificent','noisy','tiny','boring'], a:0}
+];
+
+const EX_GRAMMAR = [
+  {q:'Yesterday, we ______ a film.', opts:['watched','were watching','watch','are watching'], a:0},
+  {q:'While she ______ to school, it started to rain.', opts:['walked','was walking','walks','is walking'], a:1},
+  {q:'At 2 pm, I ______ a book when the phone rang.', opts:['was reading','read','am reading','have read'], a:0},
+  {q:'He ______ the letter and then went to sleep.', opts:['wrote','was writing','writes','is writing'], a:0},
+  {q:'They ______ when the teacher arrived.', opts:['were playing','played','play','are playing'], a:0},
+  {q:'I ______ the museum last week.', opts:['visited','was visiting','visit','am visiting'], a:0},
+  {q:'We ______ dinner when our guests arrived.', opts:['were cooking','cooked','cook','are cooking'], a:0},
+  {q:'She ______ a message and then left.', opts:['wrote','was writing','writes','is writing'], a:0},
+  {q:'They ______ to music when I called.', opts:['were listening','listened','listen','are listening'], a:0},
+  {q:'I ______ my homework yesterday.', opts:['finished','was finishing','finish','am finishing'], a:0}
+];
+
+const EXAM_TOTAL = 25; // 15 + 10
+const exStart = document.getElementById('EX_start');
+const exBox   = document.getElementById('EX_box');
+const exRes   = document.getElementById('EX_res');
+const exRev   = document.getElementById('EX_review');
+
+exStart.onclick = ()=>{
+  const name = document.getElementById('EX_name').value.trim();
+  if(!name){ alert('من فضلك اكتبي اسمك الثلاثي.'); return; }
+  // Build combined array
+  const vocabOrder = shuffle([...EX_VOCAB.keys()]).slice(0,15);
+  const gramOrder  = shuffle([...EX_GRAMMAR.keys()]).slice(0,10);
+  const combined = vocabOrder.map(i=>({type:'v', ...EX_VOCAB[i]})).concat(gramOrder.map(i=>({type:'g', ...EX_GRAMMAR[i]})));
+  const order = shuffle([...combined.keys()]);
+  let idx=0, score=0;
+  render();
+  function render(){ const q = combined[order[idx]]; exRev.innerHTML=''; exRes.textContent=''; exBox.innerHTML = `<div class='card'><h3>Question ${idx+1} of ${EXAM_TOTAL}</h3><p>${q.q}</p><span class='badge'>${q.type==='v'? 'Vocabulary' : 'Grammar'}</span></div>`; q.opts.forEach((op,i)=>{ const d=document.createElement('div'); d.className='option'; d.textContent=op; d.onclick=()=>choose(i); exBox.appendChild(d); }); }
+  function choose(i){ const q = combined[order[idx]]; const ops = [...exBox.querySelectorAll('.option')]; ops.forEach(o=>o.onclick=null); const ok = i===q.a; ops[q.a].classList.add('correct'); if(!ok){ ops[i].classList.add('wrong'); beep(false); } else { score++; confetti(100); beep(true); }
+    setTimeout(()=>{ idx++; if(idx<EXAM_TOTAL){ render(); } else finish(); }, 420);
+  }
+  function finish(){ exBox.innerHTML=''; exRes.innerHTML = `Your score: <b>${score}</b> / ${EXAM_TOTAL}`; exRev.innerHTML = '<h4>Review:</h4>' + order.map(ii=>{ const q = combined[ii]; return `<div><b>Q:</b> ${q.q}<br><span class=muted>✔ Correct:</span> ${q.opts[q.a]}</div>`; }).join('<hr>'); }
+};
+
+</script>
+</body>
+</html>
