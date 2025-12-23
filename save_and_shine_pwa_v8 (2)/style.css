@@ -1,0 +1,7 @@
+body{font-family:system-ui,Segoe UI,Arial;background:#fffef9;color:#24303a;margin:0}
+header{background:linear-gradient(135deg,#ffecb3,#a7d8f0);padding:12px;border-bottom:1px solid #efe7cc;color:#5b4100;position:sticky;top:0;z-index:10}
+.shareBar{display:flex;gap:8px}
+.shareBtn{padding:8px 10px;border:none;border-radius:10px;background:#ffd54f;color:#4a3000;font-weight:700}
+.tabs{display:flex;gap:8px;margin-top:8px}
+.container{padding:12px}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#4a3700;color:#fff;padding:10px 16px;border-radius:12px}
